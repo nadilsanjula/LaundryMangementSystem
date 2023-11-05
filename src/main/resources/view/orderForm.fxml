@@ -44,9 +44,9 @@
                 <Font size="25.0" />
             </font>
         </JFXButton>
-      <JFXDatePicker fx:id="PickupDate" defaultColor="#0d0d0d" layoutX="951.0" layoutY="104.0" prefHeight="65.0" prefWidth="337.0" promptText="Pickup Date" />
-      <JFXDatePicker fx:id="DeliveryDate" defaultColor="BLACK" layoutX="951.0" layoutY="225.0" prefHeight="65.0" prefWidth="337.0" promptText="Delivery Date" />
-      <JFXComboBox fx:id="comCustomerId" focusColor="#868686" layoutX="103.0" layoutY="238.0" onAction="#cmbCustomerIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Customer ID" unFocusColor="#6b6b6b" />
-      <JFXComboBox fx:id="comStaffId" focusColor="#aeacac" layoutX="103.0" layoutY="490.0" onAction="#comStaffIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Staff ID" unFocusColor="#807a7a" />
+      <JFXDatePicker fx:id="PickupDate" defaultColor="BLACK" layoutX="951.0" layoutY="104.0" prefHeight="65.0" prefWidth="337.0" promptText="Pickup Date" style="-fx-font-size: 30;" />
+      <JFXDatePicker fx:id="DeliveryDate" defaultColor="BLACK" layoutX="951.0" layoutY="225.0" prefHeight="65.0" prefWidth="337.0" promptText="Delivery Date" style="-fx-font-size: 30;" />
+      <JFXComboBox fx:id="comCustomerId" focusColor="#868686" layoutX="103.0" layoutY="238.0" onAction="#cmbCustomerIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Customer ID" style="-fx-font-size: 30;" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="comStaffId" focusColor="#aeacac" layoutX="103.0" layoutY="490.0" onAction="#comStaffIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Staff ID" style="-fx-font-size: 30;" unFocusColor="WHITE" />
     </children>
 </AnchorPane>

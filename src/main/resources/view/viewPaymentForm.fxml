@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewPaymentPane" prefHeight="783.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewPaymentFormController">
+    <children>
+        <TableView fx:id="tblPayment" layoutX="130.0" layoutY="156.0" prefHeight="531.0" prefWidth="1171.0">
+            <columns>
+                <TableColumn fx:id="colPaymentId" prefWidth="216.00003051757812" text="Payment ID" />
+                <TableColumn fx:id="colAmount" prefWidth="382.0" text="Amount" />
+                <TableColumn fx:id="colPaymentDate" prefWidth="354.0" text="Payment Date" />
+                <TableColumn fx:id="colOrderId" prefWidth="219.0" text="Order ID" />
+            </columns>
+        </TableView>
+        <JFXButton fx:id="btnBack" layoutX="46.0" layoutY="702.0" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-background-radius: 10; -fx-background-color: #D9D9D9; -fx-border-radius: 10; -fx-border-color: Black;" text="Back" textFill="WHITE">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </JFXButton>
+    </children>
+</AnchorPane>

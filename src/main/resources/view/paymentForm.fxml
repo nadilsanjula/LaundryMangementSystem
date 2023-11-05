@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="paymentPane" prefHeight="783.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PaymentFormController">
     <children>
-        <JFXTextField fx:id="txtPaymentId" focusColor="WHITE" layoutX="103.0" layoutY="113.0" promptText="Payment ID" unFocusColor="WHITE">
+        <JFXTextField fx:id="txtPaymentId" focusColor="WHITE" layoutX="103.0" layoutY="113.0" onAction="#idSearchOnAction" promptText="Payment ID" unFocusColor="WHITE">
             <font>
                 <Font size="30.0" />
             </font>
@@ -39,7 +39,7 @@
                 <Font size="25.0" />
             </font>
         </JFXButton>
-      <JFXDatePicker fx:id="DatePaymentDate" defaultColor="BLACK" layoutX="959.0" layoutY="113.0" prefHeight="65.0" prefWidth="337.0" promptText="Payment Date" />
-      <JFXComboBox fx:id="cmbOrderId" focusColor="#757575" layoutX="103.0" layoutY="233.0" prefHeight="65.0" prefWidth="337.0" promptText="Order ID" />
+      <JFXDatePicker fx:id="paymentDate" defaultColor="BLACK" layoutX="959.0" layoutY="113.0" prefHeight="65.0" prefWidth="337.0" promptText="Payment Date" />
+      <JFXComboBox fx:id="cmbOrderId" focusColor="#757575" layoutX="103.0" layoutY="233.0" prefHeight="65.0" prefWidth="337.0" promptText="Order ID" style="-fx-font-size: 30;" unFocusColor="WHITE" />
     </children>
 </AnchorPane>

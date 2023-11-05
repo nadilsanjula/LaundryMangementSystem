@@ -53,6 +53,6 @@
             <Font size="25.0" />
         </font>
     </JFXButton>
-      <JFXComboBox fx:id="cmbOrderId" focusColor="#646465" layoutX="959.0" layoutY="359.0" onAction="#cmbOrderIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Order ID" />
+      <JFXComboBox fx:id="cmbOrderId" focusColor="#646465" layoutX="959.0" layoutY="359.0" onAction="#cmbOrderIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Order ID" style="-fx-font-size: 30;" unFocusColor="WHITE"  />
   </children>
 </AnchorPane>
