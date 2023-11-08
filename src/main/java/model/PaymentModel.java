@@ -2,10 +2,14 @@ package model;
 
 import dto.LaundryItemDTO;
 import dto.PaymentDTO;
+import dto.tm.OrderTM;
+import dto.tm.PaymemtTM;
 import util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentModel {
     public static boolean save(PaymentDTO paymentDTO) throws SQLException {
@@ -34,5 +38,26 @@ public class PaymentModel {
             return paymentDTO;
         }
         return null;
+    }
+
+    public static boolean remove(String paymentId) throws SQLException {
+        String sql = "DELETE FROM payment WHERE paymentId = ?";
+        return CrudUtil.execute(sql,paymentId);
+    }
+
+    public static List<PaymemtTM> getAll() throws SQLException {
+        String sql = "SELECT * FROM payment";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        List<PaymemtTM> data = new ArrayList<>();
+        while (resultSet.next()) {
+            PaymemtTM paymemtTM = new PaymemtTM(
+                    resultSet.getString(1),
+                    resultSet.getDouble(2),
+                    resultSet.getDate(3).toLocalDate(),
+                    resultSet.getString(4)
+            );
+            data.add(paymemtTM);
+        }
+        return data;
     }
 }

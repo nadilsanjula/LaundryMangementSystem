@@ -79,3 +79,26 @@ create table laundryEquipmentMaintenance(
                                             foreign key(staffId) references staff(staffId)on update cascade on delete cascade
 );
 
+create table salary(
+                       SalaryId varchar(25) primary key ,
+                       amount double,
+                       staffId varchar(25),
+                       paymentId varchar(25),
+                       foreign key (staffId) references staff(staffId)on update cascade on delete cascade ,
+                       foreign key (paymentId)references payment(paymentId)on update cascade on delete cascade
+);
+
+create table supplier(
+                         supplierId varchar(25) primary key ,
+                         name text,
+                         email text,
+                         telNum int
+);
+
+create table supplierDetails(
+                                itemId varchar(25),
+                                supplierId varchar(25),
+                                foreign key (itemId)references item(itemId)on update cascade on delete cascade ,
+                                foreign key (supplierId)references supplier(supplierId)on update cascade on delete cascade
+
+);
