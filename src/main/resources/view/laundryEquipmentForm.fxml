@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="orderPane" prefHeight="783.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderFormController">
+<AnchorPane fx:id="laundryEquipmentPane" prefHeight="783.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LaundryEquipmentFormController">
     <children>
-        <JFXTextField fx:id="txtOrderId" focusColor="WHITE" layoutX="103.0" layoutY="113.0" onAction="#idSearchOnAction" promptText="Order ID" unFocusColor="WHITE">
+        <JFXTextField fx:id="txtMachineId" focusColor="WHITE" layoutX="103.0" layoutY="113.0" onAction="#IdSearchOnAction" promptText="Machine ID" unFocusColor="WHITE">
             <font>
                 <Font size="30.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtStatus" focusColor="WHITE" layoutX="103.0" layoutY="359.0" promptText="Status" unFocusColor="WHITE">
+        <JFXTextField fx:id="txtStatus" focusColor="WHITE" layoutX="103.0" layoutY="233.0" promptText="Current Status" unFocusColor="WHITE">
             <font>
                 <Font size="30.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtTotalAmount" focusColor="WHITE" layoutX="959.0" layoutY="359.0" promptText="Total Amount" unFocusColor="WHITE">
+        <JFXTextField fx:id="txtMachineType" focusColor="WHITE" layoutX="959.0" layoutY="113.0" promptText="Machine Type" unFocusColor="WHITE">
             <font>
                 <Font size="30.0" />
             </font>
@@ -44,9 +43,6 @@
                 <Font size="25.0" />
             </font>
         </JFXButton>
-      <JFXDatePicker fx:id="PickupDate" defaultColor="BLACK" layoutX="951.0" layoutY="104.0" prefHeight="65.0" prefWidth="337.0" promptText="Pickup Date" style="-fx-font-size: 30;" />
-      <JFXDatePicker fx:id="DeliveryDate" defaultColor="BLACK" layoutX="951.0" layoutY="225.0" prefHeight="65.0" prefWidth="337.0" promptText="Delivery Date" style="-fx-font-size: 30;" />
-      <JFXComboBox fx:id="comCustomerId" focusColor="#868686" layoutX="103.0" layoutY="238.0" onAction="#cmbCustomerIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Customer ID" style="-fx-font-size: 30;" unFocusColor="WHITE" />
-      <JFXComboBox fx:id="comStaffId" focusColor="#aeacac" layoutX="103.0" layoutY="490.0" onAction="#comStaffIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Staff ID" style="-fx-font-size: 30;" unFocusColor="WHITE" visibleRowCount="10000" />
+      <JFXDatePicker fx:id="dateRepair" layoutX="959.0" layoutY="233.0" prefHeight="53.0" prefWidth="337.0" promptText="Next Repair Date" />
     </children>
 </AnchorPane>

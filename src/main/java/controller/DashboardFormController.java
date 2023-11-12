@@ -77,6 +77,9 @@ public class DashboardFormController {
     }
 
     public void laundryEquipmentBtnOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/view/laundryEquipmentForm.fxml"));
+        load.getChildren().clear();
+        load.getChildren().add(root);
 
     }
 
