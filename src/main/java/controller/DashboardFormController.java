@@ -20,7 +20,7 @@ public class DashboardFormController {
     public JFXButton homeBtn;
     public JFXButton orderBtn;
     public JFXButton customerBtn;
-    public JFXButton salaryBtn;
+    public JFXButton SupplierBtn;
     public JFXButton laundryEquipmentBtn;
     public JFXButton paymentBtn;
     public JFXButton staffBtn;
@@ -73,7 +73,10 @@ public class DashboardFormController {
         load.getChildren().add(root);
     }
 
-    public void salaryBtnOnAction(ActionEvent actionEvent) {
+    public void supplierBtnOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/view/supplierForm.fxml"));
+        load.getChildren().clear();
+        load.getChildren().add(root);
     }
 
     public void laundryEquipmentBtnOnAction(ActionEvent actionEvent) throws IOException {
@@ -107,6 +110,7 @@ public class DashboardFormController {
         load.getChildren().add(root);
     }
 
-    public void logoutBtnOnAction(ActionEvent actionEvent) {
+    public void logoutBtnOnAction(ActionEvent actionEvent) throws IOException {
+
     }
 }

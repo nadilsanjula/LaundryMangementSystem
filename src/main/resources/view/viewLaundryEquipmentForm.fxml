@@ -10,10 +10,10 @@
     <children>
         <TableView fx:id="tblLaundryEquipment" layoutX="130.0" layoutY="156.0" prefHeight="531.0" prefWidth="1171.0">
             <columns>
-                <TableColumn fx:id="colItemId" prefWidth="158.00003051757812" text="Mechine ID" />
-                <TableColumn fx:id="colName" prefWidth="309.0" text="Machine Type" />
-                <TableColumn fx:id="colDesc" prefWidth="434.0" text="Current Status" />
-                <TableColumn fx:id="colQuantity" prefWidth="268.0" text="Next Repair Date" />
+                <TableColumn fx:id="colMachineId" prefWidth="158.00003051757812" text="Mechine ID" />
+                <TableColumn fx:id="colType" prefWidth="309.0" text="Machine Type" />
+                <TableColumn fx:id="colStatus" prefWidth="434.0" text="Current Status" />
+                <TableColumn fx:id="colRepairDate" prefWidth="268.0" text="Next Repair Date" />
             </columns>
         </TableView>
         <JFXButton fx:id="btnBack" layoutX="46.0" layoutY="702.0" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-background-radius: 10; -fx-background-color: #D9D9D9; -fx-border-radius: 10; -fx-border-color: Black;" text="Back" textFill="WHITE">
