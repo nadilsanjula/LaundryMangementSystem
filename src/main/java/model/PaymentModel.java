@@ -1,9 +1,7 @@
 package model;
 
-import dto.LaundryItemDTO;
 import dto.PaymentDTO;
-import dto.tm.OrderTM;
-import dto.tm.PaymemtTM;
+import dto.tm.PaymentTM;
 import util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -45,18 +43,18 @@ public class PaymentModel {
         return CrudUtil.execute(sql,paymentId);
     }
 
-    public static List<PaymemtTM> getAll() throws SQLException {
+    public static List<PaymentTM> getAll() throws SQLException {
         String sql = "SELECT * FROM payment";
         ResultSet resultSet = CrudUtil.execute(sql);
-        List<PaymemtTM> data = new ArrayList<>();
+        List<PaymentTM> data = new ArrayList<>();
         while (resultSet.next()) {
-            PaymemtTM paymemtTM = new PaymemtTM(
+            PaymentTM paymentTM = new PaymentTM(
                     resultSet.getString(1),
                     resultSet.getDouble(2),
                     resultSet.getDate(3).toLocalDate(),
                     resultSet.getString(4)
             );
-            data.add(paymemtTM);
+            data.add(paymentTM);
         }
         return data;
     }

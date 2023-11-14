@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 
-public class PaymemtTM {
+public class PaymentTM {
     private String paymentId;
     private double amount;
     private LocalDate paymentDate;

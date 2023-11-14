@@ -1,8 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
-import dto.tm.LaundryItemTM;
-import dto.tm.PaymemtTM;
+import dto.tm.PaymentTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.LaundryItemModel;
 import model.PaymentModel;
 
 import java.io.IOException;
@@ -38,15 +36,15 @@ public class ViewPaymentFormController implements Initializable {
 
     private void getAll() {
         try {
-            List<PaymemtTM> paymemtTMS = PaymentModel.getAll();
-            ObservableList<PaymemtTM> list = FXCollections.observableArrayList();
-            for (PaymemtTM paymemtTM : paymemtTMS) {
+            List<PaymentTM> paymentTMS = PaymentModel.getAll();
+            ObservableList<PaymentTM> list = FXCollections.observableArrayList();
+            for (PaymentTM paymentTM : paymentTMS) {
                 list.add(
-                        new PaymemtTM(
-                                paymemtTM.getPaymentId(),
-                                paymemtTM.getAmount(),
-                                paymemtTM.getPaymentDate(),
-                                paymemtTM.getOrderId()
+                        new PaymentTM(
+                                paymentTM.getPaymentId(),
+                                paymentTM.getAmount(),
+                                paymentTM.getPaymentDate(),
+                                paymentTM.getOrderId()
                         ));
             }
             tblPayment.setItems(list);

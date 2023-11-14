@@ -27,7 +27,6 @@ create table orders(
                        pickupDate date not null,
                        deliverDate date not null,
                        amount double not null,
-                       status varchar(25) not null,
                        customerId varchar(35),
                        staffId varchar(35),
                        foreign key(customerId) references customer(customerId) on update cascade on delete cascade,

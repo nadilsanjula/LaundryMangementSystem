@@ -41,7 +41,6 @@ public class ViewOrderFormController implements Initializable {
                                 orderTM.getPickupDate(),
                                 orderTM.getDeliveryDate(),
                                 orderTM.getAmount(),
-                                orderTM.getStatus(),
                                 orderTM.getCustomerId(),
                                 orderTM.getStaffid()
                         ));
@@ -58,7 +57,6 @@ public class ViewOrderFormController implements Initializable {
         colPickupDate.setCellValueFactory(new PropertyValueFactory<>("pickupDate"));
         colDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colStaffID.setCellValueFactory(new PropertyValueFactory<>("staffid"));
     }

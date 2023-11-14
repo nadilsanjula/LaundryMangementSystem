@@ -13,7 +13,6 @@ public class OrderDTO {
     private LocalDate pickupDate;
     private LocalDate deliveryDate;
     private double amount;
-    private String status;
     private String customerId;
     private String staffid;
 

@@ -37,6 +37,7 @@ public class OrderFormController {
     public JFXTextField txtStatus;
     public JFXComboBox comCustomerId;
     public JFXComboBox comStaffId;
+    public JFXButton btnplaceOrder;
 
     private CustomerModel customerModel = new CustomerModel();
     private StaffModel staffModel = new StaffModel();
@@ -49,13 +50,12 @@ public class OrderFormController {
         LocalDate pickupDate = PickupDate.getValue();
         LocalDate deliveryDate = DeliveryDate.getValue();
         Double amount = Double.valueOf((txtTotalAmount.getText()));
-        String status = txtStatus.getText();
         String customerId = (String) comCustomerId.getValue();
         String staffId = (String) comStaffId.getValue();
 
 
         try {
-            boolean isSaved = OrderModel.save(new OrderDTO(orderId, pickupDate, deliveryDate,amount, status, customerId,staffId));
+            boolean isSaved = OrderModel.save(new OrderDTO(orderId, pickupDate, deliveryDate,amount, customerId,staffId));
 
 
             if (isSaved) {
@@ -65,7 +65,6 @@ public class OrderFormController {
                 PickupDate.getValue();
                 DeliveryDate.getValue();
                 txtTotalAmount.setText("");
-                txtStatus.setText("");
                 comCustomerId.setValue("");
                 comStaffId.setValue("");
                 observableList.clear();
@@ -85,20 +84,18 @@ public class OrderFormController {
         LocalDate pickupDate = PickupDate.getValue();
         LocalDate deliveryDate = DeliveryDate.getValue();
         Double amount = Double.valueOf((txtTotalAmount.getText()));
-        String status = txtStatus.getText();
         String customerId = (String) comCustomerId.getValue();
         String staffId = (String) comStaffId.getValue();
 
         boolean isUpdated = false;
         try {
-            isUpdated = OrderModel.update(new OrderDTO(orderId,pickupDate,deliveryDate,amount,status,customerId,staffId));
+            isUpdated = OrderModel.update(new OrderDTO(orderId,pickupDate,deliveryDate,amount,customerId,staffId));
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated successfully").show();
                 txtOrderId.setText("");
                 PickupDate.getValue();
                 DeliveryDate.getValue();
                 txtTotalAmount.setText("");
-                txtStatus.setText("");
                 comCustomerId.setValue("");
                 comStaffId.setValue("");
                 observableList.clear();
@@ -123,7 +120,6 @@ public class OrderFormController {
                 PickupDate.getValue();
                 DeliveryDate.getValue();
                 txtTotalAmount.setText("");
-                txtStatus.setText("");
                 comCustomerId.setValue("");
                 comStaffId.setValue("");
                 observableList.clear();
@@ -206,7 +202,6 @@ public class OrderFormController {
                 PickupDate.setValue(orderDTO.getPickupDate());
                 DeliveryDate.setValue(orderDTO.getDeliveryDate());
                 txtTotalAmount.setText(String.valueOf(orderDTO.getAmount()));
-                txtStatus.setText(orderDTO.getStatus());
                 comCustomerId.setValue(orderDTO.getCustomerId());
                 comStaffId.setValue(orderDTO.getStaffid());
             }else {
@@ -216,5 +211,11 @@ public class OrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/placeOrderForm.fxml"));
+        orderPane.getChildren().clear();
+        orderPane.getChildren().add(load);
     }
 }
