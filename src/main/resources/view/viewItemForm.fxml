@@ -18,7 +18,7 @@
             <TableColumn fx:id="colOrderId" prefWidth="217.0" text="Order ID" />
             </columns>
         </TableView>
-        <JFXButton fx:id="btnBack" layoutX="46.0" layoutY="702.0" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-background-radius: 10; -fx-background-color: #D9D9D9; -fx-border-radius: 10; -fx-border-color: Black;" text="Back" textFill="WHITE">
+        <JFXButton fx:id="btnBack" layoutX="46.0" layoutY="702.0" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-background-radius: 10;-fx-background-color: rgba(217, 217, 217, 0.2);-fx-border-width: 3; -fx-border-radius: 10; -fx-border-color: black;" text="Back" textFill="WHITE">
             <font>
                 <Font size="25.0" />
             </font>

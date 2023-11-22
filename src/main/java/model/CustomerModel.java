@@ -37,7 +37,7 @@ public class CustomerModel {
         if (resultSet.next()){
             CustomerDTO customerDTO= new CustomerDTO();
             customerDTO.setCustomerId(resultSet.getString(1));
-            customerDTO.setName(resultSet.getString(3));
+            customerDTO.setName(resultSet.getString(2));
             customerDTO.setEmail(resultSet.getString(3));
             customerDTO.setAddress(resultSet.getString(4));
             customerDTO.setTelNum(resultSet.getInt(5));

@@ -9,12 +9,12 @@
 
 <AnchorPane fx:id="orderPane" prefHeight="783.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderFormController">
     <children>
-        <JFXTextField fx:id="txtOrderId" focusColor="WHITE" layoutX="103.0" layoutY="113.0" onAction="#idSearchOnAction" promptText="Order ID" unFocusColor="WHITE">
+        <JFXTextField fx:id="txtOrderId" focusColor="WHITE" layoutX="103.0" layoutY="113.0" onAction="#idSearchOnAction" promptText="Order ID" unFocusColor="WHITE" style="-fx-text-fill: white; -fx-prompt-text-fill: white;">
             <font>
                 <Font size="30.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtTotalAmount" focusColor="WHITE" layoutX="959.0" layoutY="359.0" promptText="Total Amount" unFocusColor="WHITE">
+        <JFXTextField fx:id="txtTotalAmount" focusColor="WHITE" layoutX="959.0" layoutY="359.0" promptText="Total Amount" unFocusColor="WHITE" style="-fx-text-fill: white; -fx-prompt-text-fill: white;">
             <font>
                 <Font size="30.0" />
             </font>
@@ -41,8 +41,8 @@
         </JFXButton>
       <JFXDatePicker fx:id="PickupDate" defaultColor="BLACK" layoutX="951.0" layoutY="104.0" prefHeight="65.0" prefWidth="337.0" promptText="Pickup Date" style="-fx-font-size: 30;" />
       <JFXDatePicker fx:id="DeliveryDate" defaultColor="BLACK" layoutX="951.0" layoutY="225.0" prefHeight="65.0" prefWidth="337.0" promptText="Delivery Date" style="-fx-font-size: 30;" />
-      <JFXComboBox fx:id="comCustomerId" focusColor="#868686" layoutX="103.0" layoutY="238.0" onAction="#cmbCustomerIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Customer ID" style="-fx-font-size: 30;" unFocusColor="WHITE" />
-      <JFXComboBox fx:id="comStaffId" focusColor="#aeacac" layoutX="103.0" layoutY="359.0" onAction="#comStaffIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Staff ID" style="-fx-font-size: 30;" unFocusColor="WHITE" visibleRowCount="10000" />
+      <JFXComboBox fx:id="comCustomerId" focusColor="#868686" layoutX="103.0" layoutY="238.0" onAction="#cmbCustomerIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Customer ID" style="-fx-font-size: 30;" unFocusColor="WHITE -fx-text-fill: white; -fx-prompt-text-fill: white;" />
+      <JFXComboBox fx:id="comStaffId" focusColor="#aeacac" layoutX="103.0" layoutY="359.0" onAction="#comStaffIdOnAction" prefHeight="65.0" prefWidth="337.0" promptText="Staff ID" style="-fx-font-size: 30;-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE" visibleRowCount="10000" />
       <JFXButton fx:id="btnplaceOrder" layoutX="91.0" layoutY="668.0" onAction="#btnPlaceOrderOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-background-radius: 10; -fx-background-color: #D9D9D9; -fx-border-radius: 10; -fx-border-color: #229954;" text="Place Order" textFill="WHITE">
          <font>
             <Font size="25.0" />

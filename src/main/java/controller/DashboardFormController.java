@@ -68,7 +68,7 @@ public class DashboardFormController {
     }
 
     public void orderBtnOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane root = FXMLLoader.load(getClass().getResource("/view/orderForm.fxml"));
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/view/placeOrderForm.fxml"));
         load.getChildren().clear();
         load.getChildren().add(root);
     }
