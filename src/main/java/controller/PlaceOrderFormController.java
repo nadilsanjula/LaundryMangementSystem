@@ -1,8 +1,15 @@
 package controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import db.DBConnection;
 import dto.CustomerDTO;
 import dto.ItemDTO;
 import dto.PlaceOrderDTO;
@@ -20,13 +27,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+import javax.mail.internet.MimeMultipart;
+import javax.sql.DataSource;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class PlaceOrderFormController implements Initializable {
     public JFXButton btnPlaceOrder;
@@ -143,6 +161,145 @@ public class PlaceOrderFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String textToEncode = "Order Id = " + orderId +
+                "\npickupDate  = " + pickupDate +
+                "\nDeliver Date = " + deliverDate +
+                "\nAmount = " + amount +
+                "\nCustomerId = " + customerId +
+                "\nStaffId = " + staffId;
+        String filePath = "qr-code.png"; // Output file path
+
+
+        String customerEmail = getEmailFromDatabase(customerId);
+        if (customerEmail != null && !customerEmail.isEmpty()) {
+            sendEmail(customerEmail, filePath);
+        } else {
+            System.out.println("Customer email not found.");
+        }
+
+        int width = 300; // Width of the QR code image
+        int height = 300; // Height of the QR code image
+
+        try {
+            // Create a QR code writer
+            MultiFormatWriter writer = new MultiFormatWriter();
+
+            // Set up encoding hints (optional)
+            Map<EncodeHintType, Object> hints = new HashMap<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
+            // Generate a QR code matrix
+            BitMatrix bitMatrix = writer.encode(textToEncode, BarcodeFormat.QR_CODE, width, height, hints);
+
+            // Convert the matrix to an image and save it to a file
+            MatrixToImageWriter.writeToPath(bitMatrix, "PNG", Paths.get(filePath));
+
+            System.out.println("QR Code generated successfully!");
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getEmailFromDatabase(String customerId) {
+        return DatabaseHelper.getCustomerEmailById(customerId);
+    }
+
+
+    // Assuming you have a DatabaseHelper class with the following structure:
+    public static class DatabaseHelper {
+
+        private static String getCustomerEmailById(String customerId) {
+            String email = null;
+
+            try (Connection connection = DBConnection.getConnection()) {
+                String sql = "SELECT email FROM customer WHERE customerId = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setString(1, customerId);
+
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        if (resultSet.next()) {
+                            email = resultSet.getString("email");
+                            System.out.println("Found email in database: " + email);
+                        } else {
+                            System.out.println("Email not found in database for customer ID: " + customerId);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return email;
+        }
+
+
+    }
+
+
+    private void sendEmail(String toEmail, String filePath) {
+        final String username = "nadilsanjula2002@gmail.com"; // Your email
+        final String password = "arjl asap prge fpia"; // Your email password
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com"); // Use your email provider's SMTP host
+        props.put("mail.smtp.port", "587"); // Use your email provider's SMTP port
+        System.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        System.setProperty("mail.smtp.ssl.enable", "true");
+        System.setProperty("mail.smtp.ssl.ciphersuites", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable", "true");
+
+
+
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            message.setSubject("Your Order QR Code");
+
+            // Create the message part
+            BodyPart messageBodyPart = new MimeBodyPart();
+
+            // Now set the actual message
+            messageBodyPart.setText("Thank you for placing the order. Here is your QR code.");
+
+            // Create a multipart message
+            Multipart multipart = new MimeMultipart();
+
+            // Set text message part
+            multipart.addBodyPart(messageBodyPart);
+
+            // Part two is attachment
+            messageBodyPart = new MimeBodyPart();
+            javax.activation.DataSource source = new FileDataSource(filePath);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName("qr-code.png");
+            multipart.addBodyPart(messageBodyPart);
+
+            // Send the complete message parts
+            message.setContent(multipart);
+
+
+            // Send message
+            Transport.send(message);
+
+            System.out.println("Email sent successfully with QR code attachment.");
+
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }

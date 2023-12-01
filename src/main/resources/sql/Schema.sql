@@ -102,6 +102,11 @@ create table supplierDetails(
                                 itemId varchar(25),
                                 supplierId varchar(25),
                                 foreign key (itemId)references item(itemId)on update cascade on delete cascade ,
-                                foreign key (supplierId)references supplier(supplierId)on update cascade on delete cascade
+                                foreign key (supplierId)references supplier(supplierId)on update cascade on delete cascade
 
 );
+
+insert into orders values("O001",'2000/12/2','2023/2/2','242',"C001","S001");
+
+DELETE FROM orders WHERE orderId = "O008";
+

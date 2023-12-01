@@ -95,13 +95,16 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotal" layoutX="952.0" layoutY="716.0" prefHeight="30.0" prefWidth="175.0" textFill="#248ad3" />
+      <Label fx:id="lblTotal" layoutX="952.0" layoutY="716.0" prefHeight="45.0" prefWidth="247.0" textFill="#248ad3">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Label>
       <Label layoutX="786.0" layoutY="75.0" prefHeight="30.0" prefWidth="136.0" text="Deliver Date :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="dateDeliver" defaultColor="WHITE" layoutX="917.0" layoutY="75.0" />
+      <JFXDatePicker fx:id="dateDeliver" defaultColor="#248ad3" layoutX="917.0" layoutY="75.0" />
       <Label layoutX="72.0" layoutY="242.0" prefHeight="30.0" prefWidth="136.0" text="Staff ID :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />

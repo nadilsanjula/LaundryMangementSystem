@@ -17,6 +17,7 @@ import model.StaffModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class StaffFormController {
     public AnchorPane staffPane;
@@ -33,61 +34,79 @@ public class StaffFormController {
     ObservableList<StaffDTO> observableList = FXCollections.observableArrayList();
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
-        String staffId = txtStaffId.getText();
-        String name = txtName.getText();
-        String email = txtEmail.getText();
-        Integer num = Integer.valueOf(txtNumber.getText());
-        String jobRole = txtRole.getText();
+        boolean isValead = validateStaff();
 
-        try {
-            boolean isSaved = StaffModel.save(new StaffDTO(staffId, name,email, num,jobRole));
+        if (isValead) {
+            String staffId = txtStaffId.getText();
+            String name = txtName.getText();
+            String email = txtEmail.getText();
+            Integer num = Integer.valueOf(txtNumber.getText());
+            String jobRole = txtRole.getText();
+
+            try {
+                boolean isSaved = StaffModel.save(new StaffDTO(staffId, name, email, num, jobRole));
 
 
-            if (isSaved) {
+                if (isSaved) {
 
-                new Alert(Alert.AlertType.CONFIRMATION, "Saved  !!!").show();
-                txtStaffId.setText("");
-                txtName.setText("");
-                txtNumber.setText("");
-                txtNumber.setText("");
-                txtRole.setText("");
-                txtEmail.setText("");
-                observableList.clear();
+                    new Alert(Alert.AlertType.CONFIRMATION, "Saved  !!!").show();
+                    txtStaffId.setText("");
+                    txtName.setText("");
+                    txtNumber.setText("");
+                    txtNumber.setText("");
+                    txtRole.setText("");
+                    txtEmail.setText("");
+                    observableList.clear();
 
-            } else {
+                } else {
 
-                new Alert(Alert.AlertType.ERROR, "Not saved  !!!").show();
+                    new Alert(Alert.AlertType.ERROR, "Not saved  !!!").show();
 
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
+    private boolean validateStaff() {
+        String id = txtStaffId.getText();
+        boolean idMatch = Pattern.matches("[S]\\d{3,}", id);
+        if (!idMatch) {
+            new Alert(Alert.AlertType.ERROR, "invalid id").show();
+            return false;
+        }
+        return true;
+    }
+
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String staffId = txtStaffId.getText();
-        String name = txtName.getText();
-        Integer num = Integer.valueOf(txtNumber.getText());
-        String jobRole = txtRole.getText();
-        String email = txtEmail.getText();
+        boolean isValead = validateStaff();
 
-        boolean isUpdated = false;
-        try {
-            isUpdated = StaffModel.update(new StaffDTO(staffId, name,email,num,jobRole));
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Updated successfully").show();
-                txtStaffId.setText("");
-                txtName.setText("");
-                txtNumber.setText("");
-                txtRole.setText("");
-                txtEmail.setText("");
-                observableList.clear();
+        if (isValead) {
+            String staffId = txtStaffId.getText();
+            String name = txtName.getText();
+            Integer num = Integer.valueOf(txtNumber.getText());
+            String jobRole = txtRole.getText();
+            String email = txtEmail.getText();
 
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Update failed").show();
+            boolean isUpdated = false;
+            try {
+                isUpdated = StaffModel.update(new StaffDTO(staffId, name, email, num, jobRole));
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Updated successfully").show();
+                    txtStaffId.setText("");
+                    txtName.setText("");
+                    txtNumber.setText("");
+                    txtRole.setText("");
+                    txtEmail.setText("");
+                    observableList.clear();
+
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Update failed").show();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

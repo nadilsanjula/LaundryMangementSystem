@@ -15,6 +15,7 @@ import model.SupplierModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class SupplierFormController {
     public AnchorPane supplierPane;
@@ -51,60 +52,78 @@ public class SupplierFormController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
-        String supplierId = txtSupplierId.getText();
-        String name = txtName.getText();
-        String email = txtEmail.getText();
-        Integer telNum = Integer.valueOf(txtNumber.getText());
-        String address = txtAddress.getText();
+        boolean isValead = validateSupplier();
 
-        try {
-            boolean isSaved = SupplierModel.save(new SupplierDTO(supplierId, name,email, telNum,address));
+        if (isValead) {
+            String supplierId = txtSupplierId.getText();
+            String name = txtName.getText();
+            String email = txtEmail.getText();
+            Integer telNum = Integer.valueOf(txtNumber.getText());
+            String address = txtAddress.getText();
+
+            try {
+                boolean isSaved = SupplierModel.save(new SupplierDTO(supplierId, name, email, telNum, address));
 
 
-            if (isSaved) {
+                if (isSaved) {
 
-                new Alert(Alert.AlertType.CONFIRMATION, "Saved  !!!").show();
-                txtSupplierId.setText("");
-                txtName.setText("");
-                txtEmail.setText("");
-                txtNumber.setText("");
-                txtAddress.setText("");
-                observableList.clear();
+                    new Alert(Alert.AlertType.CONFIRMATION, "Saved  !!!").show();
+                    txtSupplierId.setText("");
+                    txtName.setText("");
+                    txtEmail.setText("");
+                    txtNumber.setText("");
+                    txtAddress.setText("");
+                    observableList.clear();
 
-            } else {
+                } else {
 
-                new Alert(Alert.AlertType.ERROR, "Not saved  !!!").show();
+                    new Alert(Alert.AlertType.ERROR, "Not saved  !!!").show();
 
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
+    private boolean validateSupplier() {
+        String id = txtSupplierId.getText();
+        boolean idMatch = Pattern.matches("[S]\\d{3,}", id);
+        if (!idMatch) {
+            new Alert(Alert.AlertType.ERROR, "invalid id").show();
+            return false;
+        }
+        return true;
+    }
+
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String supplierId = txtSupplierId.getText();
-        String name = txtName.getText();
-        String email = txtEmail.getText();
-        Integer telNum = Integer.valueOf(txtNumber.getText());
-        String address = txtAddress.getText();
+        boolean isValead = validateSupplier();
 
-        boolean isUpdated = false;
-        try {
-            isUpdated = SupplierModel.update(new SupplierDTO(supplierId, name,email, telNum,address));
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Updated successfully").show();
-                txtSupplierId.setText("");
-                txtName.setText("");
-                txtEmail.setText("");
-                txtNumber.setText("");
-                txtAddress.setText("");
-                observableList.clear();
+        if (isValead) {
+            String supplierId = txtSupplierId.getText();
+            String name = txtName.getText();
+            String email = txtEmail.getText();
+            Integer telNum = Integer.valueOf(txtNumber.getText());
+            String address = txtAddress.getText();
 
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Update failed").show();
+            boolean isUpdated = false;
+            try {
+                isUpdated = SupplierModel.update(new SupplierDTO(supplierId, name, email, telNum, address));
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Updated successfully").show();
+                    txtSupplierId.setText("");
+                    txtName.setText("");
+                    txtEmail.setText("");
+                    txtNumber.setText("");
+                    txtAddress.setText("");
+                    observableList.clear();
+
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Update failed").show();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
