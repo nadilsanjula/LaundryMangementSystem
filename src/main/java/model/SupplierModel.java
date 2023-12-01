@@ -1,11 +1,14 @@
 package model;
 
+import db.DBConnection;
 import dto.StaffDTO;
 import dto.SupplierDTO;
 import dto.tm.StaffTM;
 import dto.tm.SupplierTM;
 import util.CrudUtil;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,4 +66,20 @@ public class SupplierModel {
         }
         return data;
     }
+
+    public static int getSupplierCount() throws SQLException {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(*) AS num_of_customer FROM supplier");
+             ResultSet resultSet = pstm.executeQuery()) {
+
+            if (resultSet.next()) {
+                return resultSet.getInt("num_of_customer");
+            } else {
+                // Handle the case where no results are returned (optional).
+                return 0;
+            }
+        }
+    }
+
+
 }

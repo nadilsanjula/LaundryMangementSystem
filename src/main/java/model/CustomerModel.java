@@ -1,9 +1,13 @@
 package model;
 
 
+import db.DBConnection;
 import dto.CustomerDTO;
 import dto.tm.CustomerTM;
 import util.CrudUtil;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,4 +70,20 @@ public class CustomerModel {
         }
         return data;
     }
+
+    public static int getCustomerCount() throws SQLException {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(*) AS num_of_customer FROM customer");
+             ResultSet resultSet = pstm.executeQuery()) {
+
+            if (resultSet.next()) {
+                return resultSet.getInt("num_of_customer");
+            } else {
+                // Handle the case where no results are returned (optional).
+                return 0;
+            }
+        }
+    }
+
+
 }

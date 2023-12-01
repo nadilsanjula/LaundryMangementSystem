@@ -58,7 +58,10 @@ public class DashboardFormController {
 
     }
 
-    public void homeBtnOnAction(ActionEvent actionEvent) {
+    public void homeBtnOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/view/homeForm.fxml"));
+        load.getChildren().clear();
+        load.getChildren().add(root);
     }
 
     public void customerBtnOnAction(ActionEvent actionEvent) throws IOException {
@@ -111,6 +114,8 @@ public class DashboardFormController {
     }
 
     public void logoutBtnOnAction(ActionEvent actionEvent) throws IOException {
-
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/view/loginForm.fxml"));
+        load.getChildren().clear();
+        load.getChildren().add(root);
     }
 }

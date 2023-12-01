@@ -110,3 +110,5 @@ insert into orders values("O001",'2000/12/2','2023/2/2','242',"C001","S001");
 
 DELETE FROM orders WHERE orderId = "O008";
 
+SELECT COUNT(*) AS num_of_supplier FROM supplier;
+
